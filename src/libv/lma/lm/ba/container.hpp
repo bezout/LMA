@@ -396,6 +396,23 @@ namespace lma {
       for(auto i = table.first() ; i < table.size() ; ++i)
         v[i()] = inverse(table(i));
     }
+
+    void copy_mat(const Table<Id1,Id1,Tag,Diagonal>& table)
+    {
+      voffset.clear();
+      v.clear();
+      std::size_t total = 0;
+      indice.set_max(table.size(),table.size());
+      for(auto i = table.first() ; i < table.size() ; ++i)
+      {
+        indice.add(i,i);
+        voffset.push_back(total);
+        total++;
+      }
+      v.resize(total);//, MatrixMaker::Zero());
+      for(auto i = table.first() ; i < table.size() ; ++i)
+        v[i()] = table(i);
+    }
   };
   
   template<class P, class Q, class T> struct Table<P,Q,T,Diagonal> : public Vector<P,T,false>
