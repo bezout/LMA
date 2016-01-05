@@ -45,24 +45,25 @@ int main()
 
 #include <brigand/brigand.hpp>
 #include <brigand/types/integer.hpp>
+#include <brigand/types/type.hpp>
 #include <iostream>
 
 namespace brigand
 {
-  using stop_ = false_;
-  using continue_ = true_;
+  using stop_ = std::false_type;
+  using continue_ = std::true_type;
 
   brigand::size_t<0> zero {};
   brigand::size_t<1> one {};
 
-  template<class ... T> transform<type_from,list<T...>> remove_type(T...) { return {}; }
+  template<class ... T> transform<list<T...>,type_<_1>> remove_type(T...) { return {}; }
   template<class V, V v1, V v2> std::integral_constant<V,v1+v2> plus_(std::integral_constant<V,v1>, std::integral_constant<V,v2>) { return {}; }
 
-  template<class V, V v> true_ equal_(std::integral_constant<V,v>, std::integral_constant<V,v>) { return {}; }
-  template<class V, V v1, V v2> false_ equal_(std::integral_constant<V,v1>, std::integral_constant<V,v2>) { return {}; }
+  template<class V, V v> std::true_type equal_(std::integral_constant<V,v>, std::integral_constant<V,v>) { return {}; }
+  template<class V, V v1, V v2> std::false_type equal_(std::integral_constant<V,v1>, std::integral_constant<V,v2>) { return {}; }
 
-  template<class V, V v> false_ not_equal_(std::integral_constant<V,v>, std::integral_constant<V,v>) { return {}; }
-  template<class V, V v1, V v2> true_ not_equal_(std::integral_constant<V,v1>, std::integral_constant<V,v2>) { return {}; }
+  template<class V, V v> std::false_type not_equal_(std::integral_constant<V,v>, std::integral_constant<V,v>) { return {}; }
+  template<class V, V v1, V v2> std::true_type not_equal_(std::integral_constant<V,v1>, std::integral_constant<V,v2>) { return {}; }
 
   template<class L, class I> brigand::at<L,I> at_(L, I) { return {}; }
   void for_each(auto L, auto f) { brigand::for_each<decltype(L)>(f); }
@@ -74,12 +75,12 @@ namespace brigand
 
 namespace ttt
 {
-  void repeat(auto f, auto, auto, brigand::false_, auto ... t)
+  void repeat(auto f, auto, auto, std::false_type, auto ... t)
   {
     brigand::expand(f,brigand::remove_type(t...));
   }
 
-  void repeat(auto f, auto lists, auto i, brigand::true_, auto ... n_uplets)
+  void repeat(auto f, auto lists, auto i, std::true_type, auto ... n_uplets)
   {
     brigand::for_each(at_(lists,i),[&](auto type)
     {

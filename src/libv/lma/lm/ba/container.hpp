@@ -431,7 +431,7 @@ namespace lma {
     {
       for(auto& block : *this)
         for(size_t k = 0 ; k < I ; ++k)
-          block(k,k) += lambda;
+          at(block,k,k) += lambda;
     }
     
     void resize(const SIC<P,P>& sic)
@@ -444,7 +444,7 @@ namespace lma {
       Float lambda = 0;
       for(auto& x : *this)
         for(size_t k = 0 ; k < I; ++k)
-          lambda = std::max(std::abs(x(k,k)),lambda);
+          lambda = std::max(std::abs(at(x,k,k)),lambda);
       return lambda;
     }
     

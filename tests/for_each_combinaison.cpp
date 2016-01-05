@@ -22,8 +22,8 @@ struct Cout
   Cout operator()(brigand::type_<char>) const { std::cout << "char "; return *this;}
   Cout operator()(brigand::type_<int>) const { std::cout << "int "; return *this;}
   Cout operator()(brigand::type_<std::size_t>) const { std::cout << "size_t "; return *this;}
-  template<int I>
-  Cout operator()(brigand::int_<I>) const { std::cout << "<" << I << "> "; return *this;}
+  template<std::size_t I>
+  Cout operator()(std::integral_constant<std::size_t,I>) const { std::cout << "<" << I << "> "; return *this;}
   Cout operator()(std::string str) const { std::cout << str << " "; return *this;}
   Cout operator()(const char*& str) const { std::cout << str << " "; return *this;}
   Cout operator,(auto x) const { return this->operator()(x);}
@@ -31,9 +31,9 @@ struct Cout
 
 int main()
 {
-  using l1 = list<int_<1>,int_<2>>;
-  using l2 = list<int_<3>,int_<4>,int_<5>>;
-  using l3 = list<int_<6>,int_<7>,int_<8>,int_<9>>;
+  using l1 = list<brigand::size_t<1>,brigand::size_t<2>>;
+  using l2 = list<brigand::size_t<3>,brigand::size_t<4>,brigand::size_t<5>>;
+  using l3 = list<brigand::size_t<6>,brigand::size_t<7>,brigand::size_t<8>,brigand::size_t<9>>;
   using Lists = list<l1,l2,l3>;
 
   ttt::for_each_combinaison(

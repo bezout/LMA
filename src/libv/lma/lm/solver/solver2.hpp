@@ -15,10 +15,13 @@
 #ifndef __OPTIMISATION2_SOLVER_SOLVER2_HPP__
 #define __OPTIMISATION2_SOLVER_SOLVER2_HPP__
 
+#include <libv/core/miscmath.hpp>
+
 #include "../ba/bas.hpp"
 #include "../bundle/view.hpp"
 #include "default_callback.hpp"
 #include "policies.hpp"
+
 
 namespace lma
 {

@@ -51,7 +51,6 @@ namespace lma
 // #pragma omp parallel for reduction(+:error) if(use_omp())
     for(auto iobs = bundle.template at_obs<Obs>().first() ; iobs < nb_obs ; ++iobs)
     {
-      
       if ((errors[iobs()].second = make_function(bundle.obs(iobs))(bundle.map(iobs),errors[iobs()].first)))
       {
         auto tmp = errors[iobs()].first;

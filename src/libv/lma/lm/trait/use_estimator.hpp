@@ -16,7 +16,7 @@
 #define __LMA_OPT2_TRAIT_USE_ESTIMATOR_HPP__
 
 #include <libv/lma/version.hpp>
-#include <libv/core/miscmath.hpp>
+
 #include <libv/lma/lm/container/container.hpp>
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/fusion/include/for_each.hpp>

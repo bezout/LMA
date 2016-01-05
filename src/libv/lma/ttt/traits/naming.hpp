@@ -79,6 +79,11 @@ namespace ttt {
     static std::string name() { return ttt::name<T>() + " const&";}
   };
 
+  template<> struct Name<void>
+  {
+    static std::string name() { return "void";}
+  };
+
 }//! eon ttt
 
 

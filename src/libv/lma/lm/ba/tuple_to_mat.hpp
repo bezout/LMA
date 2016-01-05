@@ -56,10 +56,26 @@ namespace lma {
     void set_(Mat& m, int x, int y, const TooN::Vector<I,T>& block)
     {
       for(int i = 0 ; i < I ; ++i)
-//         for(int j = 0 ; j < J ; ++j)
           m(x+i,y) = block[i];
     }
 #endif
+
+#ifdef USE_BLAZE
+    template<size_t I, size_t J, class T> 
+    void set_(Mat& m, int x, int y, const blaze::StaticMatrix<T,I,J>& block)
+    {
+      for(int i = 0 ; i < I ; ++i)
+        for(int j = 0 ; j < J ; ++j)
+          m(x+i,y+j) = block(i,j);
+    }
+    template<size_t I, class T> 
+    void set_(Mat& m, int x, int y, const blaze::StaticVector<T,I>& block)
+    {
+      for(size_t i = 0 ; i < I ; ++i)
+          m(x+i,y) = block[i];
+    }
+#endif
+
     
     template<class T, int I, int J> 
     void set_(Eigen::SparseMatrix<T>& m, int x, int y, const Eigen::Matrix<T,I,J>& block)

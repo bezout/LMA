@@ -17,10 +17,14 @@
 
 namespace lma
 {
-  struct Eig{};
+  struct Eig {};
   
   #ifdef USE_TOON
   struct Toon {};
+  #endif
+
+  #ifdef USE_BLAZE
+  struct Blaze {};
   #endif
 }
 
