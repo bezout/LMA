@@ -9,7 +9,7 @@
 cmake_minimum_required(VERSION 2.6)
 project(sphere)
 
-find_package(libv REQUIRED core lma graphic geometry)
+find_package(libv REQUIRED core lma)
 find_package(Boost REQUIRED chrono system date_time thread)
 find_package(OpenGL REQUIRED)
 
