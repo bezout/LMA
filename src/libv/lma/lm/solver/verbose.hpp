@@ -176,7 +176,8 @@ private:
         << " to " << s.final_cost 
         << " in " << clock_total.toc() 
         << " sec.(" << s.it_interne 
-        << " it)." << std::endl;
+        << " it)." << color.reset()
+        << std::endl;
       // static const boost::format format("\e[36m%-21s: %g\e[m, ");
       // std::cerr << boost::format(format) % "Initial" % s.initial_cost;;
       // std::cerr << boost::format(format) % "Final cost" % s.final_cost;
